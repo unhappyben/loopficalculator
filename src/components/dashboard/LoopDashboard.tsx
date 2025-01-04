@@ -80,15 +80,15 @@ export default function LoopDashboard() {
         return collateralUsd * ltv;
       };
     
-      const calculateHealthFactor = (collateralUsd: number, borrowUsd: number) => {
-        if (!borrowUsd || borrowUsd === 0) return Infinity;
+      const calculateHealthFactor = (collateralUsd: number, borrowUsd: number): string => {
+        if (!borrowUsd || borrowUsd === 0) return 'Infinity';
         const selectedMarket = markets.find(m => m.id === selectedVault);
-        if (!selectedMarket) return Infinity;
+        if (!selectedMarket) return 'Infinity';
         const ltv = parseFloat(selectedMarket.lltv) / 1e18;
         const maxBorrow = collateralUsd * ltv;
         return (maxBorrow / borrowUsd).toFixed(2);
       };
-    
+      
       const calculateReturns = () => {
         const collateralUsd = parseFloat(collateralAmount) || 0;
         const borrowUsd = parseFloat(borrowAmount) || 0;
@@ -304,11 +304,11 @@ export default function LoopDashboard() {
             <div className="p-4 bg-gray-50 rounded-lg space-y-2">
               <div className="flex justify-between">
                 <span className="text-sm text-gray-600">Max Borrow</span>
-                <span>${maxBorrow.toFixed(2)}</span>
-              </div>
+                <span>${(typeof maxBorrow === 'number' ? maxBorrow : 0).toFixed(2)}</span>
+                </div>
               <div className="flex justify-between">
                 <span className="text-sm text-gray-600">LTV</span>
-                <span>{(vaults.find(v => v.id === selectedVault)?.ltv * 100 || 0).toFixed(2)}%</span>
+                <span>{(vaults.find(v => v.id === selectedVault)?.ltv ?? 0) * 100}%</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-sm text-gray-600">Health Factor</span>
