@@ -43,8 +43,6 @@ export default function LoopDashboard() {
         collateralPrice: market.collateralAsset?.priceUsd || 0,
         borrowApy: (market.state?.borrowApy || 0)
       }));
-      console.log('Transformed vaults:', transformed);
-      return transformed;
     }, [markets]);
   
     const strategies = [
