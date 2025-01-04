@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
+import { Analytics } from "@vercel/analytics/react"
 import { VaultSelector } from '@/components/ui/vault-selector';
 import { AlertCircle } from 'lucide-react';
 import { useMarkets } from '@/hooks/useMarkets';
