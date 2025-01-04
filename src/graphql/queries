@@ -1,0 +1,78 @@
+// src/graphql/queries.ts
+import { gql } from '@apollo/client';
+
+export const GET_MARKETS = gql`
+  query getMarketsWithSupplyingVaults(
+    $first: Int!
+    $skip: Int!
+    $orderBy: String!
+    $orderDirection: String!
+    $where: MarketWhereInput!
+  ) {
+    markets(
+      first: $first
+      skip: $skip
+      orderBy: $orderBy
+      orderDirection: $orderDirection
+      where: $where
+    ) {
+      items {
+        id
+        whitelisted
+        lltv
+        collateralAsset {
+          id
+          address
+          decimals
+          name
+          priceUsd
+          symbol
+          tags
+          yield {
+            apr
+          }
+        }
+        loanAsset {
+          id
+          address
+          decimals
+          name
+          priceUsd
+          symbol
+          tags
+        }
+        state {
+          id
+          apyAtTarget
+          borrowApy
+          borrowAssets
+          borrowAssetsUsd
+          borrowShares
+          collateralAssets
+          fee
+          liquidityAssets
+          liquidityAssetsUsd
+          supplyApy
+          supplyAssets
+          supplyAssetsUsd
+          supplyShares
+          utilization
+          timestamp
+        }
+        dailyApys {
+          borrowApy
+        }
+        weeklyApys {
+          borrowApy
+        }
+        monthlyApys {
+          borrowApy
+        }
+        warnings {
+          type
+          level
+        }
+      }
+    }
+  }
+`;
